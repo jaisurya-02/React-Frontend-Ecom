@@ -39,7 +39,7 @@ const App = ({ children }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:3000/products');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/products`);
         const data = await response.json();
         console.log('API products:', data);
         // Map API data to frontend format
@@ -66,7 +66,7 @@ const App = ({ children }) => {
     const fetchCart = async () => {
       try {
         const token = sessionStorage.getItem('token');
-        const response = await fetch('http://localhost:3000/cart', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         });
         const data = await response.json();
@@ -92,7 +92,7 @@ const App = ({ children }) => {
     
     // Fetch updated products list from API
     try {
-      const response = await fetch('http://localhost:3000/products');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/products`);
       const data = await response.json();
       const mappedProducts = data.map(product => ({
         id: product._id || product.id || product.product_id,
@@ -113,7 +113,7 @@ const App = ({ children }) => {
     setCart(newCart);
     try {
       const token = sessionStorage.getItem('token');
-      await fetch('http://localhost:3000/cart', {
+      await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ const App = ({ children }) => {
     setCart(updatedCart);
     try {
       const token = sessionStorage.getItem('token');
-      await fetch('http://localhost:3000/cart', {
+      await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ const App = ({ children }) => {
     setCart(updatedCart);
     try {
       const token = sessionStorage.getItem('token');
-      await fetch('http://localhost:3000/cart', {
+      await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -183,7 +183,7 @@ const App = ({ children }) => {
     setCart({});
     try {
       const token = sessionStorage.getItem('token');
-      await fetch('http://localhost:3000/cart', {
+      await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
         method: 'DELETE',
         headers: token ? { Authorization: `Bearer ${token}` } : undefined,
       });
